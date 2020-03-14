@@ -1,15 +1,15 @@
 $(document).ready(function () {
-    let time = moment().format("h:mm:ss");
-    let timeSplit = time.split(":");
-    let minutesToRefresh = 59 - parseInt(timeSplit[1]);
-    let secondsToRefresh = 60 - parseInt(timeSplit[2]);
-    let timeToRefresh = minutesToRefresh * 60 + secondsToRefresh;
-    let secondsElapsed = 0;
-    let timerUntilStartReloading = setInterval(function () {
+    var time = moment().format("h:mm:ss");
+    var timeSplit = time.split(":");
+    var minutesToRefresh = 59 - parseInt(timeSplit[1]);
+    var secondsToRefresh = 60 - parseInt(timeSplit[2]);
+    var timeToRefresh = minutesToRefresh * 60 + secondsToRefresh;
+    var secondsElapsed = 0;
+    var timerUntilStartReloading = setInterval(function () {
         secondsElapsed++
         if (secondsElapsed === timeToRefresh) {
             console.log(moment());
-            let isReloading = confirm("It's a new hour! Would you like to reload the page?");
+            var isReloading = confirm("It's a new hour! Would you like to reload the page?");
             if (isReloading) {
                 window.location.reload(true);
             } else {
@@ -21,16 +21,15 @@ $(document).ready(function () {
 
 
 
-let timeBlockContainer = $(".container");
-let todaysDateEl = $("#currentDay");
+var timeBlockContainer = $(".container");
+var todaysDateEl = $("#currentDay");
 
 todaysDateEl.text(moment().format("dddd, MMMM Do"));
 
-//Code to generate time blocks
-let timesArr = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
+var timesArr = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
 
-for (let i = 1; i < timesArr.length; i++) {
-    let newTimeBlockEL = $("#9AM").clone();
+for (var i = 1; i < timesArr.length; i++) {
+    var newTimeBlockEL = $("#9AM").clone();
     newTimeBlockEL.attr("id", timesArr[i]);
     newTimeBlockEL.children(".row").attr("style", "white-space: pre-Wrap");
     newTimeBlockEL.children(".row").children(".hour").text(timesArr[i]);
@@ -38,8 +37,8 @@ for (let i = 1; i < timesArr.length; i++) {
 
 };
 
-let savedDayPlans;
-let locationArr = [];
+var savedDayPlans;
+var locationArr = [];
 
 function populateSavedEvents() {
     savedDayPlans = localStorage.getItem("savedDayPlans");
@@ -53,9 +52,9 @@ function populateSavedEvents() {
         }
     }
 
-    for (let i = 0; i < locationArr.length; i++) {
-        let timeBlockElid = "#" + locationArr[i];
-        let timeBlockEl = $(timeBlockElid).children(".row").children("textarea");
+    for (var i = 0; i < locationArr.length; i++) {
+        var timeBlockElid = "#" + locationArr[i];
+        var timeBlockEl = $(timeBlockElid).children(".row").children("textarea");
         $(timeBlockElid).children(".row").children("button").attr("data-event", "yes");
         timeBlockEl.val(savedDayPlans[i].event);
     }
@@ -125,29 +124,26 @@ function changeEvent(time, index, location, buttonEl, eventInput, isPopulated) {
 
 $(".time-block").delegate("button", "click", function () {
     event.preventDefault();
-    let eventInput = $(this).siblings("textarea").val();
-    let time = $(this).siblings("p").text();
-    let location = $(this).siblings("textarea");
-    let isPopulated = $(this).attr("data-event");
-    let index = locationArr.indexOf(time);
-    let buttonEl = $(this);
+    var eventInput = $(this).siblings("textarea").val();
+    var time = $(this).siblings("p").text();
+    var location = $(this).siblings("textarea");
+    var isPopulated = $(this).attr("data-event");
+    var index = locationArr.indexOf(time);
+    var buttonEl = $(this);
 
     changeEvent(time, index, location, buttonEl, eventInput, isPopulated);
     populateSavedEvents();
 });
 
 
+var timeOfDay = moment().format("hA");
 
+var allTimeBlockEl = $(".time-block");
 
-let timeOfDay = moment().format("hA");
-
-
-let allTimeBlockEl = $(".time-block");
-
-for (let i = 0; i < allTimeBlockEl.length; i++) {
-    let timeBlock = $(allTimeBlockEl[i]);
-    let timeBlockId = timeBlock.attr("id");
-    let timeBlockTextarea = timeBlock.children(".row").children("textarea");
+for (var i = 0; i < allTimeBlockEl.length; i++) {
+    var timeBlock = $(allTimeBlockEl[i]);
+    var timeBlockId = timeBlock.attr("id");
+    var timeBlockTextarea = timeBlock.children(".row").children("textarea");
     if (timeBlockId === timeOfDay) {
         timeBlockTextarea.addClass("present");
     } else if (moment(timeBlockId, "hA").isBefore()) {
@@ -165,4 +161,6 @@ $("#clear").on("click", function () {
         $(".time-block").find("button").attr("data-event", "none");
         locationArr = [];
     }
+
+
 }); 

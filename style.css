@@ -35,7 +35,7 @@ textarea{
 }
 
 .row {
-  /* white-space: pre-wrap; */
+
   height: 80px;
   border-top: 1px solid white;
   
@@ -50,17 +50,17 @@ textarea{
 
 .past {
   background-color: #d3d3d3;
-  color:black;
+  color: black;
 }
 
 .present {
   background-color: #ff6961;
-  color:black; 
+  color: black; 
 }
 
 .future {
-  background-color: purple;
-  color:black; 
+  background-color: #77dd77;
+  color: black; 
 }
 
 .saveBtn {
@@ -75,3 +75,4 @@ textarea{
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
+
